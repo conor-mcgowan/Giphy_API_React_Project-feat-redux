@@ -15,17 +15,19 @@ function App() {
   return (
     <>
       <Router>
-        <nav>
-          <NavLink to="/login" activeClassName="active-link">
-            Login
-          </NavLink>
-          <NavLink to="/search" activeClassName="active-link">
-            Search
-          </NavLink>
-          <NavLink to="/favorites" activeClassName="active-link">
-            Favorites
-          </NavLink>
-        </nav>
+        <header>
+          <nav className="nav-bar">
+            <NavLink to="/login" activeClassName="active-link">
+              Login
+            </NavLink>
+            <NavLink to="/search" activeClassName="active-link">
+              Search
+            </NavLink>
+            <NavLink to="/favorites" activeClassName="active-link">
+              Favorites
+            </NavLink>
+          </nav>
+        </header>
         <main>
           <Switch>
             <Route exact path="/login" component={LoginPage} />
@@ -36,6 +38,7 @@ function App() {
             </Route>
           </Switch>
         </main>
+        <br />
         <footer>This is a footer</footer>
       </Router>
     </>
