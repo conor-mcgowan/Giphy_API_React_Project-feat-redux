@@ -1,6 +1,6 @@
 import React from "react";
 
-const Loginage = (props) => {
+const LoginPage = (props) => {
   return <h1>LoginPage Works</h1>;
 };
 
