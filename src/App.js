@@ -17,13 +17,25 @@ function App() {
       <Router>
         <header>
           <nav className="nav-bar">
-            <NavLink to="/login" activeClassName="active-link">
+            <NavLink
+              to="/login"
+              className="nav-link text-center"
+              activeClassName="active-link"
+            >
               Login
             </NavLink>
-            <NavLink to="/search" activeClassName="active-link">
+            <NavLink
+              to="/search"
+              className="nav-link text-center"
+              activeClassName="active-link"
+            >
               Search
             </NavLink>
-            <NavLink to="/favorites" activeClassName="active-link">
+            <NavLink
+              to="/favorites"
+              className="nav-link text-center"
+              activeClassName="active-link"
+            >
               Favorites
             </NavLink>
           </nav>

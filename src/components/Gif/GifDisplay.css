@@ -1,0 +1,16 @@
+.gif-container {
+  flex-basis: calc(100% / 3 - 14px);
+  margin: 7px;
+  display: flex;
+  flex-direction: column;
+}
+
+.gif-title {
+}
+
+.gif {
+  max-width: 100%;
+  display: block;
+  margin: auto;
+  max-height: 225px;
+}
