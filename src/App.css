@@ -29,6 +29,8 @@ body {
   width: 40%;
   margin: auto;
   justify-content: right;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-container {
@@ -49,7 +51,7 @@ body {
 button {
   display: block;
   margin: auto;
-  height: 30px;
-  width: 100px;
+  height: 28px;
+  width: 80px;
   font-size: large;
 }

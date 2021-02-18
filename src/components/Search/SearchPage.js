@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import GifDisplay from "../Gif/GifDisplay.js";
+import { setSearch } from "../../redux/actions";
 import "./SearchPage.css";
 
 const SearchPage = (props) => {
   const [query, setQuery] = useState("");
   const [rating, setRating] = useState("pg-13");
   const [limit, setLimit] = useState(25);
-  const [gifs, setGifs] = useState([]);
+  // const [gifs, setGifs] = useState([]); NOW IN GLOBAL STATE
   const [error, setError] = useState("");
 
   async function getGifs(query, rating, limit) {
@@ -19,21 +21,22 @@ const SearchPage = (props) => {
       let resGifs = json.data.map((val) => {
         return { id: val.id, title: val.title, url: val.images.original.url };
       });
-      setGifs(resGifs);
+      props.setSearch(resGifs);
     } catch (e) {
       setError("Something went wrong! Please try again later.");
-      setGifs([]);
+      setSearch([]);
     }
   }
 
   return (
     <>
-      <div className="form-container">
-        <div>
+      <div className="form">
+        <div className="form-container">
           <label htmlFor="query">Search</label>
           <input
             type="text"
             id="query"
+            class="input"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
@@ -73,7 +76,7 @@ const SearchPage = (props) => {
       <main className="results-container">
         {error.length > 0 && <h1>{error}</h1>}
         {error.length === 0 &&
-          gifs.map((v) => {
+          props.gifs.map((v) => {
             return <GifDisplay gif={v} key={v.id} />;
           })}
       </main>
@@ -81,4 +84,15 @@ const SearchPage = (props) => {
   );
 };
 
-export default SearchPage;
+const mapDispatchToProps = {
+  setSearch,
+};
+
+function mapStateToProps(state) {
+  return {
+    globalState: state,
+    gifs: state.search,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
