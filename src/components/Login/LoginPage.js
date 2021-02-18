@@ -21,7 +21,7 @@ const LoginPage = (props) => {
       <h1 className="text-center">Login</h1>
       <div className="form">
         <div className="form-container">
-          <label htmlFor="username" class="text-center label">
+          <label htmlFor="username" className="text-center label">
             Username
           </label>
           <input
@@ -35,13 +35,13 @@ const LoginPage = (props) => {
         <div className="form-container">
           <label
             htmlFor="password"
-            class="text-center label"
+            className="text-center label"
             value={username}
             onChange={(e) => setPassword(e.target.value)}
           >
             Password
           </label>
-          <input type="text" id="password" className="input" />
+          <input type="password" id="password" className="input" />
         </div>
         <button onClick={() => login()}>Log In</button>
       </div>

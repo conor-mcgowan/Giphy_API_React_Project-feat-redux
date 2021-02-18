@@ -48,7 +48,7 @@ body {
   margin: auto;
 }
 
-button {
+button:not(.favorite) {
   display: block;
   margin: auto;
   height: 28px;

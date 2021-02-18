@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import GifDisplay from "../Gif/GifDisplay.js";
-import { setSearch } from "../../redux/actions";
+import { setSearch, addFavorite, deleteFavorite } from "../../redux/actions";
 import "./SearchPage.css";
 
 const SearchPage = (props) => {
@@ -10,6 +10,12 @@ const SearchPage = (props) => {
   const [limit, setLimit] = useState(25);
   // const [gifs, setGifs] = useState([]); NOW IN GLOBAL STATE
   const [error, setError] = useState("");
+  const [faveIds, setFaveIds] = useState([]);
+
+  useEffect(() => {
+    let ids = props.favorites.map((gif) => gif.id);
+    setFaveIds(ids);
+  }, [props.favorites]);
 
   async function getGifs(query, rating, limit) {
     const key = "srFHOhXtFpt5VtYfGapcbnWoKjhRzs2V";
@@ -77,7 +83,15 @@ const SearchPage = (props) => {
         {error.length > 0 && <h1>{error}</h1>}
         {error.length === 0 &&
           props.gifs.map((v) => {
-            return <GifDisplay gif={v} key={v.id} />;
+            return (
+              <GifDisplay
+                gif={v}
+                key={v.id}
+                isFavorite={faveIds.includes(v.id)}
+                deleteFavorite={props.deleteFavorite}
+                addFavorite={props.addFavorite}
+              />
+            );
           })}
       </main>
     </>
@@ -86,12 +100,15 @@ const SearchPage = (props) => {
 
 const mapDispatchToProps = {
   setSearch,
+  addFavorite,
+  deleteFavorite,
 };
 
 function mapStateToProps(state) {
   return {
-    globalState: state,
+    username: state.user.username,
     gifs: state.search,
+    favorites: state.favorites,
   };
 }
 

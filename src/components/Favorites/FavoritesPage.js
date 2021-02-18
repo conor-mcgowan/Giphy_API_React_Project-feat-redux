@@ -1,20 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
+import { deleteFavorite } from "../../redux/actions";
+import { connect } from "react-redux";
+import "./FavoritesPage.css";
 import GifDisplay from "../Gif/GifDisplay";
 
 const FavoritesPage = (props) => {
-  const [favorites, setFavorites] = useState([]);
   return (
     <>
       <h1 className="text-center">Favorites</h1>
-      <button>Add to Favorites</button>
-      <button>Remove from Favorites</button>
       <div>
-        {favorites.map((v) => (
-          <GifDisplay key={v.id} gif={v} />
+        {props.favorites.map((v) => (
+          <GifDisplay
+            gif={v}
+            key={v.id}
+            isFavorite={true}
+            deleteFavorite={props.deleteFavorite}
+          />
         ))}
       </div>
     </>
   );
 };
 
-export default FavoritesPage;
+const mapDispatchToProps = {
+  deleteFavorite,
+};
+
+function mapStateToProps(state) {
+  return {
+    favorites: state.favorites,
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(FavoritesPage);
